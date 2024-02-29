@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="mt-5 px-10">
+    <header class="mt-5 px-10" id="header">
         <div class="flex justify-center gap-3">
             <label class="input input-bordered flex items-center gap-2 input-info">
                 <input type="text" class="grow" placeholder="Search...." id="searchField"/>
@@ -23,9 +23,11 @@
             </label>
             <input type="button" value="Search" class="btn btn-success" onclick="searchButton()">
         </div>
+        <!-- total items found -->
+        <div id="foundItems"></div>
     </header>
-    <section id="gadgetsCardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 m-2 ">
-    </section>
+
+    <section id="gadgetsCardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 m-2 "></section>
 
     <script src="script.js"></script>
 </body>
