@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <header class="mt-5 px-10" id="header">
+    <header class="mt-5 px-10 mx-auto container" id="header">
         <div class="flex justify-center gap-3">
             <label class="input input-bordered flex items-center gap-2 input-info">
-                <input type="text" class="grow" placeholder="Search...." id="searchField"/>
+                <input type="text" class="grow" placeholder="Search...." id="searchField" />
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                     class="w-4 h-4 opacity-70">
                     <path fill-rule="evenodd"
@@ -25,9 +25,13 @@
         </div>
         <!-- total items found -->
         <div id="foundItems"></div>
+        <div class="mx-auto text-center hidden" id="loadingIcon">
+            <span class="loading loading-spinner text-success w-[30px]"></span>
+        </div>
     </header>
 
-    <section id="gadgetsCardContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 m-2 "></section>
+    <section id="gadgetsCardContainer"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 mx-auto container"></section>
 
     <script src="script.js"></script>
 </body>
