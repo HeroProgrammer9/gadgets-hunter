@@ -1,17 +1,17 @@
 // all common DOM selector collections
-const gadgetsCardContainer = document.getElementById("gadgetsCardContainer")
+const gadgetsCardContainer = document.getElementById("gadgetsCardContainer");
+const searchField = document.getElementById("searchField");
 
 // fetch and load data from API
 const loadData = async (search) => {
     const load = await fetch(`https://openapi.programming-hero.com/api/phones?search=${search}`)
     const data = await load.json()
-    createGadgetCard(data)
-
+        createGadgetCard(data.data);
 }
 
 
 // create display card for every gadget
-const createGadgetCard = ({ data }) => {
+const createGadgetCard = (data) => {
     data.forEach(gadget => {
         const gadgetsCard = document.createElement("div");
         gadgetsCard.classList.add("px-6", "py-4", "bg-red-100" ,"rounded-xl")
@@ -27,4 +27,16 @@ const createGadgetCard = ({ data }) => {
     });
 }
 
+// handle search button
+const searchButton = () =>{
+    if(searchField.value){
+        gadgetsCardContainer.innerHTML = ''
+        loadData(searchField.value);
+    }
+    else{
+        alert("search field is empty")
+    }
+}
+
+// load and display initial gadgets for home page
 loadData("iphone")
