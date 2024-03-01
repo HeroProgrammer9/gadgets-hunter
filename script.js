@@ -3,6 +3,8 @@ const gadgetsCardContainer = document.getElementById("gadgetsCardContainer");
 const searchField = document.getElementById("searchField");
 const foundItems = document.getElementById("foundItems");
 const loadingIcon = document.getElementById("loadingIcon");
+const seeAllField = document.getElementById("seeAllField");
+const seeAllButton = document.getElementById("seeAllButton");
 
 // fetch and load data from API
 const loadData = async (search) => {
@@ -10,14 +12,23 @@ const loadData = async (search) => {
     const load = await fetch(`https://openapi.programming-hero.com/api/phones?search=${search}`)
     const data = await load.json()
 
-    // clear the found items initially
+    // clear before displayed gadgets when load new Data
     foundItems.innerText = ``
     if (data.data.length) {
         const itemsFound = document.createElement("h2")
         itemsFound.classList.add("text-xl", "text-green-600")
         itemsFound.innerText = `${data.data.length} items found`
         foundItems.appendChild(itemsFound)
-        createGadgetCard(data.data);
+
+        // if gadgets found more than 10. Display 10 item and See all button will visible
+        if (data.data.length >= 10) {
+            createGadgetCard(data.data.slice(0, 10))
+            seeAllField.classList.remove("hidden")
+        }
+        else {
+            createGadgetCard(data.data)
+            seeAllField.classList.add("hidden")
+        }
     }
     else {
         const notFound = document.createElement("h2")
@@ -26,6 +37,13 @@ const loadData = async (search) => {
         foundItems.appendChild(notFound)
         loadingMoment(false)
     }
+
+    // show all gadgets when see all button clicked
+    seeAllButton.addEventListener("click", function () {
+        gadgetsCardContainer.innerHTML = ``
+        createGadgetCard(data.data)
+        seeAllField.classList.add("hidden")
+    })
 }
 
 
@@ -51,6 +69,7 @@ const createGadgetCard = (data) => {
 const searchButton = () => {
     if (searchField.value) {
         gadgetsCardContainer.innerHTML = ''
+
         loadData(searchField.value);
     }
     else {
@@ -58,7 +77,7 @@ const searchButton = () => {
     }
 }
 
-
+// show or hide the loading icon
 const loadingMoment = (loadingState) => {
     if (loadingState) {
         loadingIcon.classList.remove("hidden")
